@@ -18,16 +18,24 @@ int main (int argc, char **argv)
         printf(" %s:%s >> ",userName,currentPath);
         scanf("%s", userInput );
 
-        if(fork()==0)
-        {
+
              if(strcmp(userInput,"pwd") == 0)
             {
+                 if(fork()==0) {
 
-                 execlp("pwd","pwd",NULL);
+                    if (execlp("pwd", "pwd", NULL) == -1) {
+                        printf("\nCould not execute command..");
+
+                    }
+                    exit(0);
+                }
+                 else{
+                     wait(NULL);
+                 }
 
              }
 
-        }
+
 
 
     }
