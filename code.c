@@ -24,7 +24,7 @@ void execArgs(char* input,char userCmd[MAXARR][MAXLENGTH], int* length){
       //  printf("%d",i);
     }
     length=&i;
-   
+
 }
 
 
@@ -42,6 +42,7 @@ int main (int argc, char **argv)
         scanf("%s", userInput);
         execArgs(userInput, cmd, &length);
 
+        exit(0);
         if (fork() == 0) {
         if (strcmp(userInput, "pwd") == 0) {
 
@@ -62,17 +63,26 @@ int main (int argc, char **argv)
                 exit(0);
             }
             if (strcmp(cmd[0], "ls") == 0) {
-
-
                 char *binaryPath = "/bin/ls";
-                char *arg1 = "-lh";
-                char *arg2 = "/home";
-                
- 
-            execl(binaryPath, binaryPath, arg1, arg2, NULL);
+
+                if(strcmp(cmd[1], "-l") == 0)
+                {
+                     char *arg1 = "-l";
+                     execl(binaryPath, binaryPath, arg1,  NULL);
+                }
+                else{
+                    execl(binaryPath, binaryPath, NULL);
+                }
+
+
+
+
+
+
+
                 exit(0);
             }
-        
+
 
     }
         else {
